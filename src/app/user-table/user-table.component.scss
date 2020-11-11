@@ -1,0 +1,44 @@
+.userTabelWrapper {
+    .title {
+        border: 2px solid black;
+    }
+
+    .componetHeader {
+        display: flex;
+        justify-content: space-between;
+    }
+    .avatar {
+        background-color: orange;
+        color: white;
+        height: 35px;
+        width: 35px;
+        border-radius: 50%;
+        display: flex;
+        justify-content: center;
+        font-family: Assistant-SemiBold, Arial, Helvetica, sans-serif;
+        font-size: 16px;
+      }
+
+      .remove-text{
+          color: red;
+      }
+
+      .pointer {
+          cursor: pointer;
+      }
+
+      .icon {
+          display: none;
+      }
+
+      .remove-text:hover {
+        .icon {
+            display: inline;
+            color: red !important;
+        }
+    }
+
+    .text-center {
+        text-align: center;
+    }
+}

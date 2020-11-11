@@ -1,0 +1,133 @@
+\<div class="userTabelWrapper">
+    <div>
+        <div class="p-3 title"><h1>USER MANAGMENT</h1></div>
+        <div class="mt-5 container">
+          <div class="componetHeader">
+            <h3>USER RECORDS</h3>
+            <button class="btn btn-success" (click)="add(addpop)">Add New</button>
+          </div>
+          <table class="w-100 mt-3">
+            <tr>
+              <th>Avatar</th>
+              <th>Name</th>
+              <th>Email</th>
+              <th>Experience</th>
+              <th></th>
+            </tr>
+            <tr class="py-2" *ngFor="let item of userList; let i=index">
+              <td>
+                <div class="avatar pointer">
+                  <img
+                    src=" {{item.avatar}}"
+                    alt="image not found"
+                    class="w-100"
+                  />
+                </div>  
+               </td>
+              <td>{{item.name}}</td>
+              <td>{{item.email}}</td>
+              <td>{{item.experience}}</td>
+              <td class="remove-text pointer" (click)="remove(i)"><i class="fas fa-trash-alt icon"></i> Remove</td>
+            </tr>
+          </table>
+          <br>
+          <br>
+          <br>
+          <br>
+          ** as their is no backend image is not store when added new user
+        </div>
+    </div>
+  </div>
+
+  <ng-template #addpop class="color-bg-F9FAFC">
+    <div class="modal-header">
+        <p class="modal-title pull-left">Add new record</p>
+        <button type="button" class="close pull-right" aria-label="Close" (click)="modalRef.hide()">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="userForm" (ngSubmit)="addUser()">
+            <div class="row">
+                <div class="col-sm-12 col-xs-12 col-mg-3 col-lg-3">
+                    <label class="my-2">Email</label><br>
+                    <label class="my-2">Name</label><br>
+                    <label class="my-2">date of joining</label><br>
+                    <label class="my-2">leaving of joining</label><br>
+                    <label class="my-2 mt-5">upload an Image</label>
+                </div>
+                <div class="col-sm-12 col-xs-12 col-mg-3 col-lg-3">
+                    <input  class="my-2"  [formControl]="userForm.controls['email']">
+                    <div
+                    *ngIf="
+                    userForm.controls['email'].invalid &&
+                      (userForm.controls['email'].dirty ||
+                      userForm.controls['email'].touched)
+                    "
+                    class="text-danger"
+                  >
+                    <small
+                      *ngIf="userForm.controls['email'].errors.required"
+                    >
+                      email is required.
+                    </small>
+                    <small
+                    *ngIf="userForm.controls['email'].errors.pattern"
+                  >
+                    valied email is required.
+                  </small>
+                  </div>
+                    <input class="my-2" [formControl]="userForm.controls['name']">
+                    <div
+                    *ngIf="
+                    userForm.controls['name'].invalid &&
+                      (userForm.controls['name'].dirty ||
+                      userForm.controls['name'].touched)
+                    "
+                    class="text-danger"
+                  >
+                    <small
+                      *ngIf="userForm.controls['name'].errors.required"
+                    >
+                    name is required.
+                    </small>
+                  </div>
+                    <input type="date" class="my-2" [formControl]="userForm.controls['joiningDate']">
+                    <div
+                    *ngIf="
+                    userForm.controls['joiningDate'].invalid &&
+                      (userForm.controls['joiningDate'].dirty ||
+                      userForm.controls['joiningDate'].touched)
+                    "
+                    class="text-danger"
+                  >
+                    <small
+                      *ngIf="userForm.controls['joiningDate'].errors.required"
+                    >
+                    date is required.
+                    </small>
+                  </div>
+                    <div class="my-2"><input type="date" [formControl]="userForm.controls['leavingDate']"> <input type="checkbox" (change)="working($event)"> Still working</div> 
+                    <!-- <div
+                    *ngIf="
+                    (userForm.controls['leavingDate'].invalid &&
+                      (userForm.controls['leavingDate'].dirty ||
+                      userForm.controls['leavingDate'].touched)) || stillWorking
+                    "
+                    class="text-danger"
+                  >
+                    <small
+                      *ngIf="(userForm.controls['leavingDate'].errors.required) || stillWorking"
+                    >
+                    leaving date is required.
+                    </small>
+                  </div> -->
+                    <input type="file" (change)="onImagePicked($event)">
+                </div>
+            </div>
+            <div class="w-100 text-center my-4">
+                <button type="submit" class="btn btn-success px-5 py-2">save</button>
+            </div>
+        </form>
+    </div>  
+  </ng-template>
